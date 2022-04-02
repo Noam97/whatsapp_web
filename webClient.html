@@ -1,0 +1,56 @@
+<html>
+<head>
+    <meta name = "login">
+    <style>
+        body{font-family: Arial, Helvetica, sans-serif;}
+        logo{
+            width: 30%;}
+        .img {
+            text-align: center;
+            margin: 30px 0 20px 0;
+        }
+
+        .container {
+            padding: 16px;
+        }
+
+        button {
+            background-color: blue;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 8px;
+            border: none;
+            cursor: pointer;
+            width: 200px;
+            height: 20px;
+        }
+    </style>
+</head>
+
+<body>
+<h1>WhatsApp Login</h1>
+
+
+<form action="/action_page.php" method="post">
+
+    <div class="img">
+    <img src="whatsappLogo.jpg"  class="logo">
+    </div>
+
+    <div class="container">
+        <label for = "username"><b>Username: </b>
+            <input type = "text" placeholder="Enter User Name" required> </label>
+        <br>
+        <label for = "password"><b>Password: </b> <input type = "text" placeholder="Enter Password" required></label>
+
+
+        <div class="container" style="background-color:#f1f1f1">
+            <span class="register">Not registered? <a href="#"> Click here </a>to register</span>
+        </div>
+
+        <button type = "submit"> Login </button>
+    </div>
+</form>
+</body>
+</html>
+
