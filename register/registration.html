@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>registration</title>
+    <link href="register.css" rel = stylesheet>
+    <script src = registration.js></script>
+
+</head>
+<body>
+
+<!--<form method="post">-->
+<h1>
+    WhatsApp Register
+</h1>
+
+<div class="img">
+    <img src="whatsappLogo.jpg" class="logo">
+</div>
+
+<div class="container">
+    <label for = "username"><b>Username: </b>
+        <input  id = "username" type = "text" placeholder="Enter User Name" required> </label>
+    <br>
+    <label for = "password"><b>Password: </b> <input id = "password"type = "password" placeholder="Enter Password" required></label>
+    <br>
+    <label for = "confirmpassword"><b> Confirm Password: </b> <input id = "confirmpassword" type = "password" placeholder="Confirm Password" required></label>
+    <br>
+    <label for = "name"><b>Display name: </b> <input  id = "name"type = "text" placeholder="Display name" required></label>
+<div>
+    <label for = "chooseimg"> <b>Choose photo: </b> <br>
+        <input id = "chooseimg"type="file" id="img" accept="image/*"> </label>
+
+</div>
+<br>
+
+    <span class="commit" style="background-color:#f1f1f1">
+        <span class="login">Already registered? <a href="../login/login.html"> Click here </a>to login</span>
+    </span>
+    <br> <br>
+<!--    <button type = "submit"> Register </button>-->
+    <button onclick="register()" type = "submit"> Register </button>
+
+</div>
+<!--</form>-->
+</body>
+</html>
