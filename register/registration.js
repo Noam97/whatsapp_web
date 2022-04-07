@@ -1,4 +1,6 @@
+// import {HardCoded} from 'login/login.js'
 
+import {HardCoded} from "../login/login"
 function register (){
 
     var userName = document.getElementById("username").value;
@@ -15,7 +17,6 @@ function register (){
         if (!(password.value.match(letterNumber))) {
 
             document.getElementById("login_error").insertAdjacentHTML("afterend", "<h5><p>The password must contain characters and numbers</h5>")
-
         }
     }
 
