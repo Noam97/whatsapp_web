@@ -5,12 +5,9 @@ var charsHadFirstError = false;
 var confirmHadFirstError = false
 var canRegister = true;
 function register () {
-    console.log(window.HardCoded)
     var userName = document.getElementById("username").value;
-    console.log(userName)
     if (userName in HardCoded) {
         if (!UserHadFirstError) {
-            console.log("username exist")
             document.getElementById("user_error").insertAdjacentHTML("afterend", "<h5>Username already exists. Try another name</h5>")
             UserHadFirstError = true;
             canRegister = false
@@ -37,8 +34,6 @@ function register () {
 
 //confirm password
         var confirm_password = document.getElementById("confirmpassword").value;
-        console.log(confirm_password + " confirm")
-        console.log(password + " password")
         if (confirm_password != password) {
             if (!confirmHadFirstError) {
                 document.getElementById("confirmError").insertAdjacentHTML("afterend", "<h5><p>password mismatch</h5>")
