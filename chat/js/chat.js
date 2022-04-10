@@ -14,6 +14,8 @@ var fileReader = new FileReader();
 
 $(document).ready(function () {
 
+    $("#myUserName").append(window.location.search.substring(1, window.location.search.length));
+
     renderUsers();
 
     $("#createUserButton").click(function () {

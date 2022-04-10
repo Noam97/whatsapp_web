@@ -3,12 +3,16 @@ var hadFirstError = false;
 
 function checkUserName() {
     var userName = document.getElementById("username").value;
-//user name not empty
+//user name is not empty
     if (userName != "") {
         if (userName in HardCoded) {
-            checkPassword(userName)
+            if(checkPassword(userName) === true) {
+                window.location.replace(`../chat/chat.html?${userName}`);
+
+            }
+
         } else if(!hadFirstError) {
-            document.getElementById("login_error").insertAdjacentHTML("afterend", "<h5>username or password incorrect<font color='red'</h5>")
+            document.getElementById("login_error").insertAdjacentHTML("afterend", "<h5 style='color: red'>username or password is incorrect</h5>")
             hadFirstError = true
         }
     }
@@ -18,9 +22,9 @@ function checkUserName() {
         var password = document.getElementById("password").value;
         //the password is correct
         if (HardCoded[key] === password) {
-            //לעבור לעמוד הבא ..
+            return true;
         } else if (!hadFirstError) {
-            document.getElementById("login_error").insertAdjacentHTML("afterend", "<h5> username or password incorrect<font color='red'</h5>")
+            document.getElementById("login_error").insertAdjacentHTML("afterend", "<h5 style='color: red'> username or password is incorrect</h5>")
             hadFirstError = true
         }
     }

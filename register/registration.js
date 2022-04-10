@@ -36,7 +36,7 @@ function register () {
         var confirm_password = document.getElementById("confirmpassword").value;
         if (confirm_password != password) {
             if (!confirmHadFirstError) {
-                document.getElementById("confirmError").insertAdjacentHTML("afterend", "<h5><p>password mismatch</h5>")
+                document.getElementById("confirmError").insertAdjacentHTML("afterend", "<h5><p>passwords are not matched</h5>")
                 confirmHadFirstError = true
                 canRegister = false
             }

@@ -1,5 +1,6 @@
 // USERS
 function renderUsers() {
+    console.log(window.location.search);
     let users = ""
     for(const key in CHATS) {
         users += `      <div class="row sideBar-body" onclick="renderMessages('${key}')">\n` +
