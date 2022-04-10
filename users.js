@@ -1,1 +1,0 @@
-window.HardCoded = {"noamm":"456","a": "1"}

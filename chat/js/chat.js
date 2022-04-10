@@ -1,11 +1,6 @@
 // GLOBAL
-const WHOAMI = "oriroza"
-const CHATS = {
-    "ori": [{"direction": "receiver", "content": "hi", "type": "text"},
-        {"direction": "sender", "content": "hi man!", "type": "text"}],
-    "noam": [{"direction": "receiver", "content": "hi noam", "type": "text"},
-        {"direction": "sender", "content": "hi dude!", "type": "text"}]
-};
+
+const WHOAMI = window.location.search.substring(1, window.location.search.length);
 
 var localStream = null;
 var madiaRecorder = null
@@ -14,7 +9,7 @@ var fileReader = new FileReader();
 
 $(document).ready(function () {
 
-    $("#myUserName").append(window.location.search.substring(1, window.location.search.length));
+    $("#myUserName").append(WHOAMI);
 
     renderUsers();
 
@@ -112,5 +107,7 @@ $(document).ready(function () {
 
 });
 // GLOBAL
+
+
 
 

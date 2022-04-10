@@ -12,6 +12,7 @@ function renderTextMessage(content, direction) {
         '            </div>\n' +
         '          </div>\n' +
         '        </div>';
+
 }
 
 function renderFileMessage(content, direction) {
@@ -27,6 +28,7 @@ function renderFileMessage(content, direction) {
         '            </div>\n' +
         '          </div>\n' +
         '        </div>';
+
 }
 
 function renderMediaMessage(content, direction, type) {
@@ -67,8 +69,8 @@ function renderMessages(username) {
         '          <div class="col-sm-12 previous">\n' +
         '          </div>\n' +
         '        </div>';
-    for (const i in CHATS[username]) {
-        const msg = CHATS[username][i];
+    for (const i in HardCoded[username]["chats"]) {
+        const msg = HardCoded[username]["chats"][i];
         let direction = "receiver";
         if (msg["direction"] === "sender") {
             direction = "sender";
@@ -94,7 +96,8 @@ function renderMessages(username) {
 
 function addNewMessage(username, msg, type) {
     let dict_msg = {"content": msg, "direction": (username === WHOAMI) ? 'receiver' : 'sender', "type": type};
-    CHATS[username].push(dict_msg);
+    HardCoded[username]["chats"].push(dict_msg);
+   // CHATS[username].push(dict_msg);
     renderMessages(username);
     let side_two = document.getElementById("side_two");
     side_two.scrollTop = side_two.scrollHeight;
@@ -102,5 +105,6 @@ function addNewMessage(username, msg, type) {
     let conversation = document.getElementById("conversation");
     conversation.scrollTop = conversation.scrollHeight;
 }
+
 
 // MESSAGES

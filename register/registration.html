@@ -5,7 +5,7 @@
     <title>registration</title>
     <link href="register.css" rel = stylesheet>
     <script src = registration.js></script>
-    <script src = "../users.js"></script>
+    <script src = "../db.js"></script>
 
 </head>
 <body>
@@ -34,7 +34,7 @@
     <label for = "name"><b>Display name: </b> <input  id = "name"type = "text" placeholder="Display name" required></label>
 <div>
     <label for = "chooseimg"> <b>Choose photo: </b> <br>
-        <input id = "chooseimg"type="file" id="img" accept="image/*"> </label>
+        <input id = "chooseimg"type="file" id="img" accept="image/*" onchange="encodeImgtoBase64(this)"></label >
 
 </div>
 <br>
