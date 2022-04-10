@@ -1,33 +1,53 @@
-// import {HardCoded} from 'login/login.js'
 
-import {HardCoded} from "../login/login"
-function register (){
 
+var UserHadFirstError = false;
+var charsHadFirstError = false;
+var confirmHadFirstError = false
+var canRegister = true;
+function register () {
+    console.log(window.HardCoded)
     var userName = document.getElementById("username").value;
     console.log(userName)
-    if (HardCoded.has(userName)) {
-        document.getElementById("login_error").insertAdjacentHTML("afterend", "<h5>Username already exists. Try another name</h5>")
-    } else (HardCoded.push(userName));
-
-
-    var password = document.getElementById("password").value;
-
-    function contain_chars_numbers(password) {
-        var letterNumber = /^[0-9a-zA-Z]+$/;
-        if (!(password.value.match(letterNumber))) {
-
-            document.getElementById("login_error").insertAdjacentHTML("afterend", "<h5><p>The password must contain characters and numbers</h5>")
+    if (userName in HardCoded) {
+        if (!UserHadFirstError) {
+            console.log("username exist")
+            document.getElementById("user_error").insertAdjacentHTML("afterend", "<h5>Username already exists. Try another name</h5>")
+            UserHadFirstError = true;
+            canRegister = false
         }
     }
 
-//confirm password
-    var confirm_password = document.getElementById("password").value;
+    var password = document.getElementById("password").value;
 
-    if (confirm_password != password) {
-        document.getElementById("login_error").insertAdjacentHTML("afterend", "<h5><p>password mismatch</h5>")
+    function containsNumber(str) {
+        return /[0-9]/.test(str);
     }
 
+    function containLetters(str) {
+        return (/[a-z]/.test(str) || /[A-Z]/.test(str));
+    }
+
+    // password contain_chars_numbers
+    if (!(containLetters(password) && containsNumber(password))) {
+        if (!charsHadFirstError) {
+            document.getElementById("charsError").insertAdjacentHTML("afterend", "<h5><p>The password must contain characters and numbers</h5>")
+            charsHadFirstError = true
+            canRegister = false
+        }
+
+//confirm password
+        var confirm_password = document.getElementById("confirmpassword").value;
+        console.log(confirm_password + " confirm")
+        console.log(password + " password")
+        if (confirm_password != password) {
+            if (!confirmHadFirstError) {
+                document.getElementById("confirmError").insertAdjacentHTML("afterend", "<h5><p>password mismatch</h5>")
+                confirmHadFirstError = true
+                canRegister = false
+            }
+        }
+        if (canRegister) {
+            HardCoded[userName] = password
+        }
+    }
 }
-
-
-

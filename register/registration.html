@@ -5,6 +5,7 @@
     <title>registration</title>
     <link href="register.css" rel = stylesheet>
     <script src = registration.js></script>
+    <script src = "../users.js"></script>
 
 </head>
 <body>
@@ -21,10 +22,14 @@
 <div class="container">
     <label for = "username"><b>Username: </b>
         <input  id = "username" type = "text" placeholder="Enter User Name" required> </label>
+    <label class= "error" id = "user_error"> </label>
     <br>
     <label for = "password"><b>Password: </b> <input id = "password"type = "password" placeholder="Enter password" required></label>
+    <label class= "error" id = "charsError"> </label>
+
     <br>
     <label for = "confirmpassword"><b> Confirm Password: </b> <input id = "confirmpassword" type = "password" placeholder="Confirm Password" required></label>
+    <label class= "error" id = "confirmError"> </label>
     <br>
     <label for = "name"><b>Display name: </b> <input  id = "name"type = "text" placeholder="Display name" required></label>
 <div>

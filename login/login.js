@@ -1,32 +1,30 @@
 
-var HardCoded = {"noamm":"456","a": "1"}
-export {HardCoded};
-
+// var HardCoded = {"noamm":"456","a": "1"}
+var hadFirstError = false;
 
 function checkUserName() {
-
+    console.log(HardCoded)
     var userName = document.getElementById("username").value;
 //user name not empty
     if (userName != "") {
-        for (var key in HardCoded) {
-            //username exist, so we have to check tha password
-            if (userName == key) {
-                checkPassword(key)
-            }
+        if (userName in HardCoded) {
+            checkPassword(userName)
+        } else if(!hadFirstError) {
+            document.getElementById("login_error").insertAdjacentHTML("afterend", "<h5>username or password incorrect<font color='red'</h5>")
+            hadFirstError = true
         }
-        //the user name not exist
-    }
-    if (HardCoded) {
-        document.getElementById("login_error").insertAdjacentHTML("afterend", "<h5>username or password incorrect<font color='red'</h5>")
-        HardCoded = false
     }
 }
 
+
 //
-function checkPassword(key) {
-    var password = document.getElementById("password").value;
-    //the password is correct
-    if (HardCoded[key] === password) {
-        //לעבור לעמוד הבא ..
+    function checkPassword(key) {
+        var password = document.getElementById("password").value;
+        //the password is correct
+        if (HardCoded[key] === password) {
+            //לעבור לעמוד הבא ..
+        } else if (!hadFirstError) {
+            document.getElementById("login_error").insertAdjacentHTML("afterend", "<h5> username or password incorrect<font color='red'</h5>")
+            hadFirstError = true
+        }
     }
-}
