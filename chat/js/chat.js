@@ -8,10 +8,9 @@ var audioChunks = [];
 var fileReader = new FileReader();
 
 $(document).ready(function () {
-    const profilePhotoUrl = localStorage.getItem("recent-image");
-    if(profilePhotoUrl){
-        $("#profilePhoto").attr("src",profilePhotoUrl)
-    }
+
+
+    $("#profilePhoto").attr("src",HardCoded[WHOAMI]["profile"])
 
     $("#profileName").append(WHOAMI);
 
