@@ -5,18 +5,17 @@ var charsHadFirstError = false;
 var confirmHadFirstError = false
 var canRegister = true;
 function register () {
+
     var userName = document.getElementById("username").value;
     if (userName in HardCoded) {
-        console.log(canRegister)
         if (!UserHadFirstError) {
-            document.getElementById("user_error").insertAdjacentHTML("afterend", "<h5>Username already exists. Try another name</h5>")
+            document.getElementById("user_error").insertAdjacentHTML("afterend", "<h5 style='color: red'> Username already exists. Try another name</h5>")
             UserHadFirstError = true;
             canRegister = false;
 
         }
 
     }
-
 
     var password = document.getElementById("password").value;
 
@@ -31,35 +30,36 @@ function register () {
     // password contain_chars_numbers
     if (!(containLetters(password) && containsNumber(password))) {
         if (!charsHadFirstError) {
-            document.getElementById("charsError").insertAdjacentHTML("afterend", "<h5><p>The password must contain characters and numbers</h5>");
+            document.getElementById("charsError").insertAdjacentHTML("afterend", "<h5 style='color: red'>The password must contain characters and numbers</h5>");
             charsHadFirstError = true;
             canRegister = false;
         }
     }
 
-//confirm password
+        //confirm password
         var confirm_password = document.getElementById("confirmpassword").value;
         if (confirm_password != password) {
             if (!confirmHadFirstError) {
-                document.getElementById("confirmError").insertAdjacentHTML("afterend", "<h5><p>passwords are not matched</h5>");
+                document.getElementById("confirmError").insertAdjacentHTML("afterend", "<h5 style='color: red'> passwords are not matched</h5>");
                 confirmHadFirstError = true;
                 canRegister = false;
             }
         }
+        //add the user
         if (canRegister) {
-            console.log(HardCoded[userName]["password"]);
-
-           //HardCoded[userName]["password"] = password;
-            // HardCoded[userName]["profile"] =$("#imgInp").change(function() {
-            //     readURL(this);
+            HardCoded[userName] =  {
+                password: password,
+                profile: "",
+                chats: []
+            }
+            window.location.replace(`../chat/chat.html?${userName}`);
             };
 
-        console.log("HardCoded");
-
-//
-// function encodeImgtoBase64(element) {
-//     var reader = new FileReader();
-//     reader.onloadend = function () {
-//         $("#base64Code").val(reader.result);
-//     }
+/**
+function encodeImgtoBase64(element) {
+    var reader = new FileReader();
+    reader.onloadend = function () {
+        $("#base64Code").val(reader.result);
+    }
+    */
 }

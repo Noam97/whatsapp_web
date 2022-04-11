@@ -11,7 +11,7 @@ window.HardCoded = {
     password: "1",
     profile: "",
     chats: []
-},
+    },
     "b": {
         password: "2",
         profile: "",
@@ -28,3 +28,4 @@ window.HardCoded = {
         chats: []
     }
 };
+

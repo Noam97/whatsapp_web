@@ -5,10 +5,8 @@ var hadFirstError = false;
 function checkUserName() {
     var userName = document.getElementById("username").value;
 //user name is not empty
-console.log(window.HardCoded)
     if (userName != "") {
         if (userName in HardCoded) {
-            console.log(userName)
             if(checkPassword(userName) === true) {
                 window.location.replace(`../chat/chat.html?${userName}`);
 
