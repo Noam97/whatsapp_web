@@ -6,14 +6,25 @@ window.CHATS = {
         {"direction": "sender", "content": "hi dude!", "type": "text"}]
 };
 
-
-window.HardCoded = {"a": {"password":"1", "profile": "", "chats": []},
-    "b": {"password":"2", "profile": "", "chats": []},
-    "c": {"password":"2", "profile": "", "chats": []},
-    "d": {"password":"2", "profile": "", "chats": []},
-    "e": {"password":"2", "profile": "", "chats": []}
-}
-
-// USERS["ORI"]["password"]
-
-
+window.HardCoded = {
+"a": {
+    password: "1",
+    profile: "",
+    chats: []
+},
+    "b": {
+        password: "2",
+        profile: "",
+        chats: []
+    },
+    "c": {
+        password: "1",
+        profile: "",
+        chats: []
+    },
+    "d": {
+        password: "1",
+        profile: "",
+        chats: []
+    }
+};
