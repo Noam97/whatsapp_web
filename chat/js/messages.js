@@ -64,6 +64,7 @@ function renderMediaMessage(content, direction, type) {
 
 function renderMessages(username) {
     $("#side_two").removeAttr('hidden');
+    $("#currentChatUserImg").attr('src', HardCoded[username]['profile'])
     $("#conversation").empty();
     let messages = '        <div class="row message-previous">\n' +
         '          <div class="col-sm-12 previous">\n' +
@@ -95,15 +96,19 @@ function renderMessages(username) {
 }
 
 function addNewMessage(username, msg, type) {
-    let dict_msg = {"content": msg, "direction": (username === WHOAMI) ? 'receiver' : 'sender', "type": type};
+    let dict_msg = {"content": msg,
+        "direction": (username === WHOAMI) ? 'receiver' : 'sender',
+        "type": type,
+        "unix_time": +new Date()};
     HardCoded[username]["chats"].push(dict_msg);
-   // CHATS[username].push(dict_msg);
     renderMessages(username);
     let side_two = document.getElementById("side_two");
     side_two.scrollTop = side_two.scrollHeight;
 
     let conversation = document.getElementById("conversation");
     conversation.scrollTop = conversation.scrollHeight;
+
+    renderUsers(HardCoded);
 }
 
 

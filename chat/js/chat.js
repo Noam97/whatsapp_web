@@ -10,12 +10,12 @@ var fileReader = new FileReader();
 $(document).ready(function () {
     const profilePhotoUrl = localStorage.getItem("recent-image");
     if(profilePhotoUrl){
-        document.querySelector("#profilePhoto").setAttribute("src",profilePhotoUrl)
+        $("#profilePhoto").attr("src",profilePhotoUrl)
     }
 
-    $("#myUserName").append(WHOAMI);
+    $("#profileName").append(WHOAMI);
 
-    renderUsers();
+    renderUsers(HardCoded);
 
     $("#createUserButton").click(function () {
         addNewUser($("#newUserInput").val());
