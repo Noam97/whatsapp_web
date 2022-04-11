@@ -1,23 +1,10 @@
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<form runat="server">
-    <input type='file' id="imgInp" />
-    <img id="blah" src="#" alt="your image" />
-</form>
+<p><input type="file"  accept="image/*" name="image" id="file"  onchange="loadFile(event)" style="display: none;"></p>
+<p><label for="file" style="cursor: pointer;">Upload Image</label></p>
+<p><img id="output" width="200" /></p>
 
 <script>
-    function readURL(input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-
-            reader.onload = function(e) {
-                $('#blah').attr('src', e.target.result);
-            }
-
-            reader.readAsDataURL(input.files[0]); // convert to base64 string
-        }
-    }
-
-    $("#imgInp").change(function() {
-        readURL(this);
-    });
+    var loadFile = function(event) {
+        var image = document.getElementById('output');
+       image.src = URL.createObjectURL(event.target.files[0]);
+    };
 </script>

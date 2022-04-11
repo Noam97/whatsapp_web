@@ -55,7 +55,16 @@ function register () {
             window.location.replace(`../chat/chat.html?${userName}`);
             };
 
+
+
+
 /**
+ * var profilPhoto = document.getElementsByID('img').img;
+ *
+ * Adaptive[0].style.width="20px";
+ * Adaptive[0].style.width="20px";
+ * console.log(profilPhoto)
+ *
 function encodeImgtoBase64(element) {
     var reader = new FileReader();
     reader.onloadend = function () {
