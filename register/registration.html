@@ -6,6 +6,9 @@
     <link href="register.css" rel = stylesheet>
     <script src = registration.js></script>
     <script src = "../db.js"></script>
+<!--    <script src="jquery-3.6.0.min.js"></script>-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
 
 </head>
 <body>
@@ -33,8 +36,10 @@
     <br>
     <label for = "name"><b>Display name: </b> <input  id = "name"type = "text" placeholder="Display name" required></label>
 <div>
-    <label for = "chooseimg"> <b>Choose photo: </b> <br>
-        <input id = "chooseimg"type="file" id="img" accept="image/*" onchange="encodeImgtoBase64(this)"></label >
+    <label> <b>Choose photo: </b> <br>
+        <input type="file" id="img" accept="image/*"  >
+    </label >
+
 
 </div>
 <br>

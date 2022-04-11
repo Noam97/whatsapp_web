@@ -9,23 +9,22 @@ window.CHATS = {
 window.HardCoded = {
 "a": {
     password: "1",
-    profile: "",
+    profile: "https://img.fruugo.com/product/2/20/175295202_max.jpg",
     chats: []
     },
     "b": {
         password: "2",
-        profile: "",
+        profile: "https://img.fruugo.com/product/2/20/175295202_max.jpg",
         chats: []
     },
     "c": {
         password: "1",
-        profile: "",
+        profile: "https://img.fruugo.com/product/2/20/175295202_max.jpg",
         chats: []
     },
     "d": {
         password: "1",
-        profile: "",
+        profile: "https://img.fruugo.com/product/2/20/175295202_max.jpg",
         chats: []
     }
 };
-

@@ -1,13 +1,13 @@
 // USERS
 function renderUsers() {
-    console.log(window.location.search);
     let users = ""
     for(const key in HardCoded) {
+        const img = HardCoded[key]["profile"];
         if (key!==WHOAMI) {
             users += `      <div class="row sideBar-body" onclick="renderMessages('${key}')">\n` +
                 '            <div class="col-sm-3 col-xs-3 sideBar-avatar">\n' +
                 '              <div class="avatar-icon">\n' +
-                '              <img src="assests/red-color.png">\n\n' +
+                '              <img src=$HardCoded[key]["profile"]>\n\n' +
                 '              </div>\n' +
                 '            </div>\n' +
                 '            <div class="col-sm-9 col-xs-9 sideBar-main">\n' +

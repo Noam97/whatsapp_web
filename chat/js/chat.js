@@ -8,6 +8,10 @@ var audioChunks = [];
 var fileReader = new FileReader();
 
 $(document).ready(function () {
+    const profilePhotoUrl = localStorage.getItem("recent-image");
+    if(profilePhotoUrl){
+        document.querySelector("#profilePhoto").setAttribute("src",profilePhotoUrl)
+    }
 
     $("#myUserName").append(WHOAMI);
 
@@ -104,6 +108,8 @@ $(document).ready(function () {
 
         }
     });
+
+
 
 });
 // GLOBAL
