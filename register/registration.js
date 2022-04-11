@@ -3,7 +3,9 @@
 var UserHadFirstError = false;
 var charsHadFirstError = false;
 var confirmHadFirstError = false
-var canRegister = true;
+
+
+
 
 window.addEventListener("load",(event)=>{
     document.querySelector("#img").addEventListener("change",function (){
@@ -16,8 +18,10 @@ window.addEventListener("load",(event)=>{
 })
 
 function register () {
+    var canRegister = true;
 
     var userName = document.getElementById("username").value;
+    var password = document.getElementById("password").value;
     if (userName in HardCoded) {
         if (!UserHadFirstError) {
             document.getElementById("user_error").insertAdjacentHTML("afterend", "<h5 style='color: red'> Username already exists. Try another name</h5>")
@@ -28,7 +32,6 @@ function register () {
 
     }
 
-    var password = document.getElementById("password").value;
 
     function containsNumber(str) {
         return /[0-9]/.test(str);
@@ -68,21 +71,5 @@ function register () {
             window.location.replace(`../chat/chat.html?${userName}`);
             };
 
-
-
-
-/**
- * var profilPhoto = document.getElementsByID('img').img;
- *
- * Adaptive[0].style.width="20px";
- * Adaptive[0].style.width="20px";
- * console.log(profilPhoto)
- *
-function encodeImgtoBase64(element) {
-    var reader = new FileReader();
-    reader.onloadend = function () {
-        $("#base64Code").val(reader.result);
-    }
-    */
 
 }
