@@ -2,15 +2,20 @@
 
 const WHOAMI = window.location.search.substring(1, window.location.search.length);
 
+if(localStorage.getItem("new_user")) {
+    HardCoded[WHOAMI] = JSON.parse(localStorage.getItem("new_user"));
+    localStorage.removeItem("new_user");
+
+}
+
 var localStream = null;
 var madiaRecorder = null
-var audioChunks = [];
-var fileReader = new FileReader();
+
 
 $(document).ready(function () {
 
-
-    $("#profilePhoto").attr("src",HardCoded[WHOAMI]["profile"])
+ console.log(HardCoded);
+   $("#profilePhoto").attr("src",HardCoded[WHOAMI]["profile"])
 
     $("#profileName").append(WHOAMI);
 

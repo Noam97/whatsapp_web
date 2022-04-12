@@ -5,6 +5,17 @@ var charsHadFirstError = false;
 var confirmHadFirstError = false
 
 
+window.addEventListener("load",(event)=>{
+    document.querySelector("#img").addEventListener("change",function (){
+        const reader = new FileReader();
+        reader.addEventListener("load",()=>{
+
+           localStorage.setItem("recent-image", reader.result);
+        })
+        reader.readAsDataURL(this.files[0]);
+    })
+})
+
 function register () {
     var canRegister = true;
 
@@ -47,11 +58,17 @@ function register () {
 
         //add the user
         if (canRegister) {
-            HardCoded[userName] =  {
+            localStorage.setItem("new_user", JSON.stringify({
                 password: password,
-                profile:  "",
+                profile:  localStorage.getItem("recent-image"),
                 chats: []
-            }
+            }));
             window.location.replace(`../chat/chat.html?${userName}`);
             };
+
+
+
+
+
 }
+
