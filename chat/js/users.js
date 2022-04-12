@@ -1,19 +1,27 @@
 // USERS
 function renderUsers(listOfUsers) {
     let users = ""
+    let currentDate = ""
+    let lastMsgContent = ""
     for(const key in listOfUsers) {
         if (key!==WHOAMI) {
             const chatsLength = listOfUsers[key]["chats"].length;
-            const lastMessage = listOfUsers[key]["chats"][chatsLength - 1];
-            const fullDate = new Date(lastMessage["unix_time"]);
-            const hour = fullDate.toLocaleTimeString(navigator.language,
-                {hour: '2-digit', minute:'2-digit'});
-            const date = fullDate.toLocaleDateString();
-            const lastMsgContent = (lastMessage['content'].includes("blob:http") ||
-                lastMessage['content'].includes("/png:base64")) ? "new media message" : lastMessage['content'];
+            if(chatsLength > 0) {
+                const lastMessage = listOfUsers[key]["chats"][chatsLength - 1];
+                const fullDate = new Date(lastMessage["unix_time"]);
+                const hour = fullDate.toLocaleTimeString(navigator.language,
+                    {hour: '2-digit', minute: '2-digit'});
+                const date = fullDate.toLocaleDateString();
+                lastMsgContent = (lastMessage['content'].includes("blob:http") ||
+                    lastMessage['content'].includes("/png:base64")) ? "new media message" : lastMessage['content'];
 
-            // a day has passed
-            const currentDate = (new Date() - fullDate > 86400000) ? date : hour;
+                // a day has passed
+                currentDate = (new Date() - fullDate > 86400000) ? date : hour;
+            }
+            else {
+                lastMsgContent = "";
+                currentDate = "";
+            }
 
             users += `      <div class="row sideBar-body" onclick="renderMessages('${key}')">\n` +
                 '            <div class="col-sm-3 col-xs-3 sideBar-avatar">\n' +
@@ -38,7 +46,10 @@ function renderUsers(listOfUsers) {
 }
 
 function addNewUser(username) {
-    HardCoded[username] = [];
+    HardCoded[username] = {
+                profile:  "https://images1.ynet.co.il/PicServer5/2018/07/05/8640320/864028421932283640360no.jpg",
+                chats: []
+    };
     renderUsers(HardCoded);
 }
 // USERS
