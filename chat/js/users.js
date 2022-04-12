@@ -5,7 +5,7 @@ function renderUsers(listOfUsers) {
         if (key!==WHOAMI) {
             const chatsLength = listOfUsers[key]["chats"].length;
             const lastMessage = listOfUsers[key]["chats"][chatsLength - 1];
-            const fullDate = new Date(lastMessage["unix_time"] * 1000);
+            const fullDate = new Date(lastMessage["unix_time"]);
             const hour = fullDate.toLocaleTimeString(navigator.language,
                 {hour: '2-digit', minute:'2-digit'});
             const date = fullDate.toLocaleDateString();

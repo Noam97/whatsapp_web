@@ -11,6 +11,26 @@ if(localStorage.getItem("new_user")) {
 var localStream = null;
 var madiaRecorder = null
 
+function sendMessage() {
+    let comment = $("#comment");
+    let fileupload = $("#fileupload");
+    if (fileupload[0].files.length > 0) {
+        let file = fileupload[0].files[0];
+        let reader = new FileReader();
+        reader.onload = function (event) {
+            addNewMessage($("#username").text(), event.target.result, 'file');
+        };
+        reader.readAsDataURL(file);
+        $("#upload_icon").css("color", "#93918f");
+        comment.val('');
+    } else {
+        if (comment.val().length > 1) {
+            addNewMessage($("#username").text(), comment.val(), 'text');
+            comment.val('');
+        }
+    }
+}
+
 
 $(document).ready(function () {
 
@@ -37,23 +57,12 @@ $(document).ready(function () {
     });
 
     $("#sendButton").click(function () {
-        let comment = $("#comment");
-        let fileupload = $("#fileupload");
-        let formData = new FormData();
-        if (fileupload[0].files.length > 0) {
-            let file = fileupload[0].files[0];
-            let reader = new FileReader();
-            reader.onload = function (event) {
-                addNewMessage($("#username").text(), event.target.result, 'file');
-            };
-            reader.readAsDataURL(file);
-            $("#upload_icon").css("color", "#93918f");
-            comment.val('');
-        } else {
-            if (comment.val().length > 1) {
-                addNewMessage($("#username").text(), comment.val(), 'text');
-                comment.val('');
-            }
+        sendMessage();
+    });
+
+    $(document).on('keypress',function(e) {
+        if(e.which === 13) {
+            sendMessage();
         }
     });
 
