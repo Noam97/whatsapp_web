@@ -8,7 +8,7 @@ function checkUserName() {
     if (userName != "") {
         if (userName in HardCoded) {
             if(checkPassword(userName) === true) {
-                window.location.replace(`../chat/chat.html?${userName}`);
+                window.location.replace(`chat.html?${userName}`);
 
             }
 

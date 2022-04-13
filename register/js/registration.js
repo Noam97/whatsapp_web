@@ -98,7 +98,7 @@ function register () {
                 displayName: document.getElementById("name").value
             }));
         }
-        window.location.replace(`../chat/chat.html?${userName}`);
+        window.location.replace(`chat.html?${userName}`);
         };
 }
 
