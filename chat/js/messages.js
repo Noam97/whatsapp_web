@@ -12,6 +12,7 @@ function renderTextMessage(content, direction) {
         '            </div>\n' +
         '          </div>\n' +
         '        </div>';
+
 }
 
 function renderFileMessage(content, direction) {
@@ -27,6 +28,7 @@ function renderFileMessage(content, direction) {
         '            </div>\n' +
         '          </div>\n' +
         '        </div>';
+
 }
 
 function renderMediaMessage(content, direction, type) {
@@ -62,13 +64,14 @@ function renderMediaMessage(content, direction, type) {
 
 function renderMessages(username) {
     $("#side_two").removeAttr('hidden');
+    $("#currentChatUserImg").attr('src', HardCoded[username]['profile'])
     $("#conversation").empty();
     let messages = '        <div class="row message-previous">\n' +
         '          <div class="col-sm-12 previous">\n' +
         '          </div>\n' +
         '        </div>';
-    for (const i in CHATS[username]) {
-        const msg = CHATS[username][i];
+    for (const i in HardCoded[username]["chats"]) {
+        const msg = HardCoded[username]["chats"][i];
         let direction = "receiver";
         if (msg["direction"] === "sender") {
             direction = "sender";
@@ -90,17 +93,24 @@ function renderMessages(username) {
     $("#conversation").append(messages);
 
     $("#username").empty().append(username);
+    // $("#username").empty().append(HardCoded[username]["displayName"]);
 }
 
 function addNewMessage(username, msg, type) {
-    let dict_msg = {"content": msg, "direction": (username === WHOAMI) ? 'receiver' : 'sender', "type": type};
-    CHATS[username].push(dict_msg);
+    let dict_msg = {"content": msg,
+        "direction": (username === WHOAMI) ? 'receiver' : 'sender',
+        "type": type,
+        "unix_time": +new Date()};
+    HardCoded[username]["chats"].push(dict_msg);
     renderMessages(username);
     let side_two = document.getElementById("side_two");
     side_two.scrollTop = side_two.scrollHeight;
 
     let conversation = document.getElementById("conversation");
     conversation.scrollTop = conversation.scrollHeight;
+
+    renderUsers(HardCoded);
 }
+
 
 // MESSAGES

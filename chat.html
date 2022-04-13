@@ -1,18 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="utf-8">
     <title>CHAT</title>
     <!--    imports-->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/chat.css">
+    <link rel="stylesheet" href="chat/css/chat.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-    <script src="js/users.js"></script>
-    <script src="js/messages.js"></script>
-    <script src="js/chat.js"></script>
+    <script src = "db/db.js"></script>
+    <script src="chat/js/users.js"></script>
+    <script src="chat/js/messages.js"></script>
+    <script src="chat/js/chat.js"></script>
     <!--    imports-->
 
 </head>
@@ -24,10 +24,13 @@
             <div class="side-one">
                 <div class="row heading">
                     <div class="col-sm-3 col-xs-3 heading-avatar">
-                        <div class="heading-avatar-icon">
-                            <img src="assests/red-color.png">
-                            Ori
+                        <div id="myUserName" class="heading-avatar-icon">
+                            <img id="profilePhoto" src="" alt="Preview">
                         </div>
+                    </div>
+                    <div class="col-sm-3 col-xs-3 heading-name">
+                        <a id="profileName" class="heading-name-meta">
+                        </a>
                     </div>
                     <div class="col-sm-1 col-xs-1  heading-dot  pull-right">
                         <i class="fa fa-plus fa-2x  pull-right" aria-hidden="true" data-toggle="modal"
@@ -70,7 +73,7 @@
             <div class="row heading">
                 <div class="col-sm-2 col-md-1 col-xs-3 heading-avatar">
                     <div class="heading-avatar-icon">
-                            <img src="assests/red-color.png">
+                            <img id="currentChatUserImg" src="chat/assests/red-color.png">
                     </div>
                 </div>
                 <div class="col-sm-8 col-xs-7 heading-name">

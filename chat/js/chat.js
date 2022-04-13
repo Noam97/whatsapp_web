@@ -1,20 +1,46 @@
 // GLOBAL
-const WHOAMI = "oriroza"
-const CHATS = {
-    "ori": [{"direction": "receiver", "content": "hi", "type": "text"},
-        {"direction": "sender", "content": "hi man!", "type": "text"}],
-    "noam": [{"direction": "receiver", "content": "hi noam", "type": "text"},
-        {"direction": "sender", "content": "hi dude!", "type": "text"}]
-};
+
+const WHOAMI = window.location.search.substring(1, window.location.search.length);
+
+
+if(localStorage.getItem("new_user")) {
+    HardCoded[WHOAMI] = JSON.parse(localStorage.getItem("new_user"));
+    localStorage.removeItem("new_user");
+
+}
 
 var localStream = null;
 var madiaRecorder = null
-var audioChunks = [];
-var fileReader = new FileReader();
+
+function sendMessage() {
+    let comment = $("#comment");
+    let fileupload = $("#fileupload");
+    if (fileupload[0].files.length > 0) {
+        let file = fileupload[0].files[0];
+        let reader = new FileReader();
+        reader.onload = function (event) {
+            addNewMessage($("#username").text(), event.target.result, 'file');
+        };
+        reader.readAsDataURL(file);
+        $("#upload_icon").css("color", "#93918f");
+        comment.val('');
+    } else {
+        if (comment.val().length > 1) {
+            addNewMessage($("#username").text(), comment.val(), 'text');
+            comment.val('');
+        }
+    }
+}
+
 
 $(document).ready(function () {
 
-    renderUsers();
+ console.log(HardCoded);
+    $("#profilePhoto").attr("src",HardCoded[WHOAMI]["profile"]);
+
+    $("#profileName").append(HardCoded[WHOAMI]["displayName"]);
+
+    renderUsers(HardCoded);
 
     $("#createUserButton").click(function () {
         addNewUser($("#newUserInput").val());
@@ -27,28 +53,16 @@ $(document).ready(function () {
             let file = fileupload[0].files[0];
             comment.val(`file ${file.name}`);
             $("#upload_icon").css("color", "red");
-
         }
     });
 
     $("#sendButton").click(function () {
-        let comment = $("#comment");
-        let fileupload = $("#fileupload");
-        let formData = new FormData();
-        if (fileupload[0].files.length > 0) {
-            let file = fileupload[0].files[0];
-            let reader = new FileReader();
-            reader.onload = function (event) {
-                addNewMessage($("#username").text(), event.target.result, 'file');
-            };
-            reader.readAsDataURL(file);
-            $("#upload_icon").css("color", "#93918f");
-            comment.val('');
-        } else {
-            if (comment.val().length > 1) {
-                addNewMessage($("#username").text(), comment.val(), 'text');
-                comment.val('');
-            }
+        sendMessage();
+    });
+
+    $(document).on('keypress',function(e) {
+        if(e.which === 13) {
+            sendMessage();
         }
     });
 
@@ -108,7 +122,11 @@ $(document).ready(function () {
         }
     });
 
+
+
 });
 // GLOBAL
+
+
 
 
