@@ -2,6 +2,7 @@
 
 const WHOAMI = window.location.search.substring(1, window.location.search.length);
 
+
 if(localStorage.getItem("new_user")) {
     HardCoded[WHOAMI] = JSON.parse(localStorage.getItem("new_user"));
     localStorage.removeItem("new_user");
@@ -35,9 +36,9 @@ function sendMessage() {
 $(document).ready(function () {
 
  console.log(HardCoded);
-   $("#profilePhoto").attr("src",HardCoded[WHOAMI]["profile"])
+    $("#profilePhoto").attr("src",HardCoded[WHOAMI]["profile"]);
 
-    $("#profileName").append(WHOAMI);
+    $("#profileName").append(HardCoded[WHOAMI]["displayName"]);
 
     renderUsers(HardCoded);
 
@@ -52,7 +53,6 @@ $(document).ready(function () {
             let file = fileupload[0].files[0];
             comment.val(`file ${file.name}`);
             $("#upload_icon").css("color", "red");
-
         }
     });
 

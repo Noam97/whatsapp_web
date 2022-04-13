@@ -32,7 +32,7 @@ function renderUsers(listOfUsers) {
                 '            <div class="col-sm-9 col-xs-9 sideBar-main">\n' +
                 '              <div class="row">\n' +
                 '                <div class="col-sm-8 col-xs-8 sideBar-name">\n' +
-                `                  <span class="name-meta">${key}</span>\n` +
+                `                  <span class="name-meta">${listOfUsers[key]["displayName"]}</span>\n` +
                 '                </div>\n' +
                                 '<div class="col-sm-4 col-xs-4 pull-right sideBar-time">'+
                                     `<span class="time-meta pull-right"> ${currentDate}<br>${lastMsgContent}</span>`+

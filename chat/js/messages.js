@@ -93,6 +93,7 @@ function renderMessages(username) {
     $("#conversation").append(messages);
 
     $("#username").empty().append(username);
+    // $("#username").empty().append(HardCoded[username]["displayName"]);
 }
 
 function addNewMessage(username, msg, type) {

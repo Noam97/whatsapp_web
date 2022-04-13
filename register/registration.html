@@ -25,14 +25,15 @@
 <div class="container">
     <label for = "username"><b>Username: </b>
         <input  id = "username" type = "text" placeholder="Enter User Name" required> </label>
-    <label class= "error" id = "user_error"> </label>
+    <p hidden class= "error" id = "user_error" style='color: red'> Username already exists. Try another name</p>
     <br>
     <label for = "password"><b>Password: </b> <input id = "password"type = "password" placeholder="Enter password" required></label>
-    <label class= "error" id = "charsError"> </label>
+    <p hidden class= "error" id = "charsError" style='color: red'> The password must contain characters and numbers</p>
+    <p hidden class= "error" id = "emptyError" style='color: red'> Please enter password</p>
 
     <br>
     <label for = "confirmpassword"><b> Confirm Password: </b> <input id = "confirmpassword" type = "password" placeholder="Confirm Password" required></label>
-    <label class= "error" id = "confirmError"> </label>
+    <p hidden class= "error" id = "confirmError" style='color: red'> passwords are not matched</p>
     <br>
     <label for = "name"><b>Display name: </b> <input  id = "name"type = "text" placeholder="Display name" required></label>
 <div>
