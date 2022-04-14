@@ -1,8 +1,8 @@
 
 
-var hadErrorExist = false;
-var charsHadFirstError = false;
-var confirmHadFirstError = false
+var existError = false;
+var charsError = false;
+var secondPasswordError = false
 var emptyPasswordError = false
 
 window.addEventListener("load",(event)=>{
@@ -21,17 +21,18 @@ function register () {
     var canRegister = true;
     var userName = document.getElementById("username").value;
     var password = document.getElementById("password").value;
+    var displayName = document.getElementById("name").value;
     //check if the user name already exist
     if (userName in HardCoded) {
         canRegister = false;
-        if(!hadErrorExist){
+        if(!existError){
             document.getElementById("user_error").style.display = "block"
             // document.getElementById("user_error").insertAdjacentHTML("afterbegin", "<h5 style='color: red'> Username already exists. Try another name</h5>")
-            hadErrorExist = true;
+            existError = true;
         }
     }
     else{
-        hadErrorExist = false
+        existError = false
         document.getElementById("user_error").style.display = "none";
     }
     function containsNumber(str) {
@@ -55,28 +56,42 @@ function register () {
     // password contain_chars_numbers
     if (!(containLetters(password) && containsNumber(password)) && password != "") {
         canRegister = false;
-        if (!charsHadFirstError) {
+        if (!charsError) {
             document.getElementById("charsError").style.display = "block"
-            charsHadFirstError = true;
+            charsError = true;
         }
     }
     else{
-        charsHadFirstError = false
+        charsError = false
         document.getElementById("charsError").style.display = "none";
     }
 
     //confirm password
     if (document.getElementById("confirmpassword").value != password) {
         canRegister = false;
-        if (!confirmHadFirstError) {
+        if (!secondPasswordError) {
             document.getElementById("confirmError").style.display = "block"
-            confirmHadFirstError = true;
+            secondPasswordError = true;
         }
     }
     else{
-        confirmHadFirstError = false
+        secondPasswordError = false
         document.getElementById("confirmError").style.display = "none";
     }
+
+    //display name is empty
+    if (displayName == "") {
+        canRegister = false;
+        if (!displayNameError) {
+            document.getElementById("displayNameError").style.display = "block"
+            displayNameError = true;
+        }
+    }
+    else{
+        displayNameError = false
+        document.getElementById("displayNameError").style.display = "none";
+    }
+
 
     //add the user
     if (canRegister) {
