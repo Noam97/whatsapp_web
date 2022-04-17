@@ -4,6 +4,9 @@ var existError = false;
 var charsError = false;
 var secondPasswordError = false
 var emptyPasswordError = false
+var emptyUserNameError = false
+var displayNameError = false
+var passwordLength = false
 
 window.addEventListener("load",(event)=>{
     document.querySelector("#img").addEventListener("change",function (){
@@ -22,12 +25,24 @@ function register () {
     var userName = document.getElementById("username").value;
     var password = document.getElementById("password").value;
     var displayName = document.getElementById("name").value;
+    //check if the user name is empty
+    if(userName == "") {
+        canRegister = false;
+        if (!emptyUserNameError) {
+            document.getElementById("empty_username").style.display = "block"
+            emptyUserNameError = true;
+        }
+    }
+    else {
+        emptyUserNameError = false
+        document.getElementById("empty_username").style.display = "none"
+    }
+
     //check if the user name already exist
     if (userName in HardCoded) {
         canRegister = false;
         if(!existError){
             document.getElementById("user_error").style.display = "block"
-            // document.getElementById("user_error").insertAdjacentHTML("afterbegin", "<h5 style='color: red'> Username already exists. Try another name</h5>")
             existError = true;
         }
     }
@@ -53,6 +68,20 @@ function register () {
             emptyPasswordError = false
             document.getElementById("emptyError").style.display = "none"
     }
+
+//Password less than 8 characters
+        canRegister = false;
+        if (!passwordLength) {
+            document.getElementById("passwordLength").style.display = "block"
+            passwordLength = true;
+        }
+    else {
+            passwordLength = false
+        document.getElementById("passwordLength").style.display = "none"
+    }
+
+
+
     // password contain_chars_numbers
     if (!(containLetters(password) && containsNumber(password)) && password != "") {
         canRegister = false;
