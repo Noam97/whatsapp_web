@@ -36,3 +36,5 @@ window.HardCoded = {
     displayName: "Cherry"
     }
 };
+
+window.AddedChats = {}

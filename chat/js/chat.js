@@ -2,10 +2,12 @@
 
 const WHOAMI = window.location.search.substring(1, window.location.search.length);
 
+var isNewUser = false;
 
 if(localStorage.getItem("new_user")) {
     HardCoded[WHOAMI] = JSON.parse(localStorage.getItem("new_user"));
     localStorage.removeItem("new_user");
+    isNewUser = true;
 
 }
 
@@ -19,7 +21,7 @@ function sendMessage() {
         let file = fileupload[0].files[0];
         let reader = new FileReader();
         reader.onload = function (event) {
-            addNewMessage($("#username").text(), event.target.result, 'file');
+            addNewMessage($("#username").text(), event.target.result, 'file', isNewUser);
         };
         reader.readAsDataURL(file);
         $("#upload_icon").css("color", "#93918f");
@@ -27,7 +29,7 @@ function sendMessage() {
         fileupload.val(null);
     } else {
         if (comment.val().length > 1) {
-            addNewMessage($("#username").text(), comment.val(), 'text');
+            addNewMessage($("#username").text(), comment.val(), 'text', isNewUser);
             comment.val('');
         }
     }
@@ -37,13 +39,13 @@ function sendMessage() {
 $(document).ready(function () {
 
     $("#profilePhoto").attr("src",HardCoded[WHOAMI]["profile"]);
-
     $("#profileName").append(HardCoded[WHOAMI]["displayName"]);
-
-    renderUsers(HardCoded);
+    if (!isNewUser)
+        renderUsers(HardCoded, isNewUser);
 
     $("#createUserButton").click(function () {
-        addNewUser($("#newUserInput").val());
+        addNewUser($("#newUserInput").val(), isNewUser);
+        $("#newUserInput").val("");
     });
 
     $("#fileupload").change(function () {
@@ -78,8 +80,7 @@ $(document).ready(function () {
                     $("#voice_recorder").css("color", "red");
 
                     madiaRecorder.addEventListener("dataavailable", function (event) {
-                        console.log(event);
-                        addNewMessage($("#username").text(), URL.createObjectURL(event.data), 'audio');
+                        addNewMessage($("#username").text(), URL.createObjectURL(event.data), 'audio', isNewUser);
                     });
                 });
         } else {
@@ -102,13 +103,14 @@ $(document).ready(function () {
                 .then((stream) => {
                     localStream = stream;
                     madiaRecorder = new MediaRecorder(stream);
-                    madiaRecorder.start();
                     $("#video_recorder").css("color", "red");
 
                     madiaRecorder.addEventListener("dataavailable", function (event) {
-                        console.log(event);
-                        addNewMessage($("#username").text(), URL.createObjectURL(event.data), 'video');
+                        const url = (window.URL ? URL : webkitURL).createObjectURL(event.data);
+                        addNewMessage($("#username").text(), url, 'video', isNewUser);
                     });
+                    madiaRecorder.start();
+
                 });
         } else {
             localStream.getTracks().forEach((track) => {
@@ -117,7 +119,7 @@ $(document).ready(function () {
             $("#video_recorder").css("color", "#93918f");
             $("#video_recorder").attr("recording", "false");
             localStream = null;
-            madiaRecorder = null;
+            //madiaRecorder = null;
 
         }
     });

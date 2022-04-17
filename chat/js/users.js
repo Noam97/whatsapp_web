@@ -1,5 +1,5 @@
 // USERS
-function renderUsers(listOfUsers) {
+function renderUsers(listOfUsers, isNewUser) {
     let users = ""
     let currentDate = ""
     let lastMsgContent = ""
@@ -12,7 +12,7 @@ function renderUsers(listOfUsers) {
                 const hour = fullDate.toLocaleTimeString(navigator.language,
                     {hour: '2-digit', minute: '2-digit'});
                 const date = fullDate.toLocaleDateString();
-                lastMsgContent = (lastMessage['content'].includes("blob:http") ||
+                lastMsgContent = (lastMessage['content'].includes("blob:") ||
                     lastMessage['content'].includes("base64")) ? "new media message" : lastMessage['content'];
 
                 // a day has passed
@@ -23,7 +23,7 @@ function renderUsers(listOfUsers) {
                 currentDate = "";
             }
 
-            users += `      <div class="row sideBar-body" onclick="renderMessages('${key}')">\n` +
+            users += `      <div class="row sideBar-body" onclick="renderMessages('${key}', ${isNewUser})">\n` +
                 '            <div class="col-sm-3 col-xs-3 sideBar-avatar">\n' +
                 '              <div class="avatar-icon">\n' +
                 `              <img src=${listOfUsers[key]["profile"]}>\n\n` +
@@ -45,11 +45,24 @@ function renderUsers(listOfUsers) {
     $(".row.sideBar").empty().append(users);
 }
 
-function addNewUser(username) {
-    HardCoded[username] = {
-                profile:  "https://images1.ynet.co.il/PicServer5/2018/07/05/8640320/864028421932283640360no.jpg",
-                chats: []
-    };
-    renderUsers(HardCoded);
+function addNewUser(username, isNewUser) {
+    if(isNewUser) {
+        AddedChats[username] = {
+            profile: "https://images1.ynet.co.il/PicServer5/2018/07/05/8640320/864028421932283640360no.jpg",
+            chats: [],
+            displayName: username
+
+        };
+        renderUsers(AddedChats, isNewUser);
+    }
+    else {
+        HardCoded[username] = {
+            profile: "https://images1.ynet.co.il/PicServer5/2018/07/05/8640320/864028421932283640360no.jpg",
+            chats: [],
+            displayName: username
+
+        };
+        renderUsers(HardCoded, isNewUser);
+    }
 }
 // USERS

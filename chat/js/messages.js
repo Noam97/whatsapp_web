@@ -62,16 +62,23 @@ function renderMediaMessage(content, direction, type) {
 }
 
 
-function renderMessages(username) {
+function renderMessages(username, isNewUser) {
+    let listOfUsers;
+    if (isNewUser) {
+        listOfUsers = AddedChats;
+    }
+    else {
+         listOfUsers = HardCoded;
+    }
     $("#side_two").removeAttr('hidden');
-    $("#currentChatUserImg").attr('src', HardCoded[username]['profile'])
+    $("#currentChatUserImg").attr('src', listOfUsers[username]['profile'])
     $("#conversation").empty();
     let messages = '        <div class="row message-previous">\n' +
         '          <div class="col-sm-12 previous">\n' +
         '          </div>\n' +
         '        </div>';
-    for (const i in HardCoded[username]["chats"]) {
-        const msg = HardCoded[username]["chats"][i];
+    for (const i in listOfUsers[username]["chats"]) {
+        const msg = listOfUsers[username]["chats"][i];
         let direction = "receiver";
         if (msg["direction"] === "sender") {
             direction = "sender";
@@ -96,20 +103,31 @@ function renderMessages(username) {
     // $("#username").empty().append(HardCoded[username]["displayName"]);
 }
 
-function addNewMessage(username, msg, type) {
+function addNewMessage(username, msg, type, isNewUser) {
     let dict_msg = {"content": msg,
         "direction": (username === WHOAMI) ? 'receiver' : 'sender',
         "type": type,
         "unix_time": +new Date()};
-    HardCoded[username]["chats"].push(dict_msg);
-    renderMessages(username);
+    if(isNewUser) {
+        AddedChats[username]["chats"].push(dict_msg);
+        renderMessages(username, isNewUser);
+    }
+    else {
+        HardCoded[username]["chats"].push(dict_msg);
+        renderMessages(username, isNewUser);
+
+    }
     let side_two = document.getElementById("side_two");
     side_two.scrollTop = side_two.scrollHeight;
 
     let conversation = document.getElementById("conversation");
     conversation.scrollTop = conversation.scrollHeight;
-
-    renderUsers(HardCoded);
+    if(isNewUser) {
+        renderUsers(AddedChats, isNewUser);
+    }
+    else {
+        renderUsers(HardCoded, isNewUser);
+    }
 }
 
 
