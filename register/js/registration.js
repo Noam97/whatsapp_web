@@ -1,5 +1,3 @@
-
-
 var existError = false;
 var charsError = false;
 var secondPasswordError = false
@@ -19,13 +17,11 @@ window.addEventListener("load",(event)=>{
 })
 
 function register () {
-
-
     var canRegister = true;
     var userName = document.getElementById("username").value;
     var password = document.getElementById("password").value;
     var displayName = document.getElementById("name").value;
-    //check if the user name is empty
+//check if the user name is empty
     if(userName == "") {
         canRegister = false;
         if (!emptyUserNameError) {
@@ -38,7 +34,7 @@ function register () {
         document.getElementById("empty_username").style.display = "none"
     }
 
-    //check if the user name already exist
+//check if the user name already exist
     if (userName in HardCoded) {
         canRegister = false;
         if(!existError){
@@ -50,13 +46,15 @@ function register () {
         existError = false
         document.getElementById("user_error").style.display = "none";
     }
+
     function containsNumber(str) {
         return /[0-9]/.test(str);
     }
     function containLetters(str) {
         return (/[a-z]/.test(str) || /[A-Z]/.test(str));
     }
-    //empty password
+
+//empty password
     if(password == "") {
             canRegister = false;
             if (!emptyPasswordError) {
@@ -70,7 +68,7 @@ function register () {
     }
 
 //Password less than 8 characters
-        canRegister = false;
+    canRegister = false;
     if(password!="") {
         if (!passwordLength) {
             document.getElementById("passwordLength").style.display = "block"
@@ -82,9 +80,7 @@ function register () {
         document.getElementById("passwordLength").style.display = "none"
     }
 
-
-
-    // password contain_chars_numbers
+// password contain_chars_numbers
     if (!(containLetters(password) && containsNumber(password)) && password != "") {
         canRegister = false;
         if (!charsError) {
@@ -97,7 +93,7 @@ function register () {
         document.getElementById("charsError").style.display = "none";
     }
 
-    //confirm password
+//confirm password
     if (document.getElementById("confirmpassword").value != password) {
         canRegister = false;
         if (!secondPasswordError) {
@@ -110,7 +106,7 @@ function register () {
         document.getElementById("confirmError").style.display = "none";
     }
 
-    //display name is empty
+//display name is empty
     if (displayName == "") {
         canRegister = false;
         if (!displayNameError) {
@@ -123,11 +119,9 @@ function register () {
         document.getElementById("displayNameError").style.display = "none";
     }
 
-
-    //add the user
+//add the user
     if (canRegister) {
         //if the user didnt add photo - default photo
-
         if( document.getElementById("img").files.length == 0 ) {
             localStorage.setItem("new_user", JSON.stringify({
                 password: password,
@@ -147,4 +141,3 @@ function register () {
         window.location.replace(`chat.html?${userName}`);
         };
 }
-
