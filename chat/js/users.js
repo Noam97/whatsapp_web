@@ -13,7 +13,7 @@ function renderUsers(listOfUsers) {
                     {hour: '2-digit', minute: '2-digit'});
                 const date = fullDate.toLocaleDateString();
                 lastMsgContent = (lastMessage['content'].includes("blob:http") ||
-                    lastMessage['content'].includes("/png:base64")) ? "new media message" : lastMessage['content'];
+                    lastMessage['content'].includes("base64")) ? "new media message" : lastMessage['content'];
 
                 // a day has passed
                 currentDate = (new Date() - fullDate > 86400000) ? date : hour;
