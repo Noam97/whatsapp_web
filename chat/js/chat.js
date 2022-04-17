@@ -24,6 +24,7 @@ function sendMessage() {
         reader.readAsDataURL(file);
         $("#upload_icon").css("color", "#93918f");
         comment.val('');
+        fileupload.val(null);
     } else {
         if (comment.val().length > 1) {
             addNewMessage($("#username").text(), comment.val(), 'text');
@@ -35,7 +36,6 @@ function sendMessage() {
 
 $(document).ready(function () {
 
- console.log(HardCoded);
     $("#profilePhoto").attr("src",HardCoded[WHOAMI]["profile"]);
 
     $("#profileName").append(HardCoded[WHOAMI]["displayName"]);

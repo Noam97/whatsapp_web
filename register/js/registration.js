@@ -1,9 +1,10 @@
-
-
-var hadErrorExist = false;
-var charsHadFirstError = false;
-var confirmHadFirstError = false
+var existError = false;
+var charsError = false;
+var secondPasswordError = false
 var emptyPasswordError = false
+var emptyUserNameError = false
+var displayNameError = false
+var passwordLength = false
 
 window.addEventListener("load",(event)=>{
     document.querySelector("#img").addEventListener("change",function (){
@@ -16,31 +17,44 @@ window.addEventListener("load",(event)=>{
 })
 
 function register () {
-
-
     var canRegister = true;
     var userName = document.getElementById("username").value;
     var password = document.getElementById("password").value;
-    //check if the user name already exist
+    var displayName = document.getElementById("name").value;
+//check if the user name is empty
+    if(userName == "") {
+        canRegister = false;
+        if (!emptyUserNameError) {
+            document.getElementById("empty_username").style.display = "block"
+            emptyUserNameError = true;
+        }
+    }
+    else {
+        emptyUserNameError = false
+        document.getElementById("empty_username").style.display = "none"
+    }
+
+//check if the user name already exist
     if (userName in HardCoded) {
         canRegister = false;
-        if(!hadErrorExist){
+        if(!existError){
             document.getElementById("user_error").style.display = "block"
-            // document.getElementById("user_error").insertAdjacentHTML("afterbegin", "<h5 style='color: red'> Username already exists. Try another name</h5>")
-            hadErrorExist = true;
+            existError = true;
         }
     }
     else{
-        hadErrorExist = false
+        existError = false
         document.getElementById("user_error").style.display = "none";
     }
+
     function containsNumber(str) {
         return /[0-9]/.test(str);
     }
     function containLetters(str) {
         return (/[a-z]/.test(str) || /[A-Z]/.test(str));
     }
-    //empty password
+
+//empty password
     if(password == "") {
             canRegister = false;
             if (!emptyPasswordError) {
@@ -52,36 +66,63 @@ function register () {
             emptyPasswordError = false
             document.getElementById("emptyError").style.display = "none"
     }
-    // password contain_chars_numbers
+
+//Password less than 8 characters
+
+    if(password!="" && password.length <8) {
+        canRegister = false;
+        if (!passwordLength) {
+            document.getElementById("passwordLength").style.display = "block"
+            passwordLength = true;
+        }
+    }
+    else {
+        passwordLength = false
+        document.getElementById("passwordLength").style.display = "none"
+    }
+
+// password contain_chars_numbers
     if (!(containLetters(password) && containsNumber(password)) && password != "") {
         canRegister = false;
-        if (!charsHadFirstError) {
+        if (!charsError) {
             document.getElementById("charsError").style.display = "block"
-            charsHadFirstError = true;
+            charsError = true;
         }
     }
     else{
-        charsHadFirstError = false
+        charsError = false
         document.getElementById("charsError").style.display = "none";
     }
 
-    //confirm password
+//confirm password
     if (document.getElementById("confirmpassword").value != password) {
         canRegister = false;
-        if (!confirmHadFirstError) {
+        if (!secondPasswordError) {
             document.getElementById("confirmError").style.display = "block"
-            confirmHadFirstError = true;
+            secondPasswordError = true;
         }
     }
     else{
-        confirmHadFirstError = false
+        secondPasswordError = false
         document.getElementById("confirmError").style.display = "none";
     }
 
-    //add the user
+//display name is empty
+    if (displayName == "") {
+        canRegister = false;
+        if (!displayNameError) {
+            document.getElementById("displayNameError").style.display = "block"
+            displayNameError = true;
+        }
+    }
+    else{
+        displayNameError = false
+        document.getElementById("displayNameError").style.display = "none";
+    }
+
+//add the user
     if (canRegister) {
         //if the user didnt add photo - default photo
-
         if( document.getElementById("img").files.length == 0 ) {
             localStorage.setItem("new_user", JSON.stringify({
                 password: password,
@@ -101,4 +142,3 @@ function register () {
         window.location.replace(`chat.html?${userName}`);
         };
 }
-
